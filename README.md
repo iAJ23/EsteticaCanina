@@ -1,6 +1,6 @@
-# Estética Canina web
+# EsteticaCanina — Estética Canina web
 
-Aplicación Spring Boot con interfaz web y API REST para administrar mascotas y sus propietarios.
+Repositorio para el proyecto Estetica_Canina_Javaweb. Aplicación Spring Boot con interfaz web y API REST para administrar mascotas y sus propietarios.
 
 Proyecto de portafolio: convierte el flujo de una estética canina de escritorio en una aplicación web con agenda, control de acceso por roles y persistencia en MySQL. Reemplaza esta línea con la URL pública cuando despliegues la aplicación.
 

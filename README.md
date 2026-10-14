@@ -4,7 +4,7 @@ Aplicación full stack para administrar una estética canina: permite registrar 
 
 Este proyecto nació como una aplicación Java de escritorio y se transformó en una aplicación web para usar desde un navegador. Conserva el dominio y las entidades que siguen siendo útiles, y reemplaza las ventanas Swing por páginas web y endpoints REST.
 
-> **Demo:** todavía no hay una URL pública de la aplicación. GitHub aloja el código; para ejecutar Spring Boot y conectarse a MySQL hace falta desplegar la aplicación y la base de datos en un servicio de alojamiento.
+> **Presentación del proyecto:** [iaj23.github.io/EsteticaCanina](https://iaj23.github.io/EsteticaCanina/). Esta página estática muestra el proyecto y enlaza al código. **Demo interactiva:** todavía no hay una URL pública de la aplicación Spring Boot; necesita alojarse junto con una base MySQL en un servicio compatible.
 
 ## Contenido
 
@@ -194,7 +194,9 @@ La API está protegida por Spring Security y las operaciones respetan los permis
 
 El código está publicado en [GitHub](https://github.com/iAJ23/EsteticaCanina). GitHub Pages puede alojar páginas estáticas, pero no ejecuta este backend de Spring Boot ni proporciona la base MySQL de la aplicación. Para ofrecer una demo navegable se necesita un proveedor que pueda ejecutar Java/Spring Boot y conectar a una base MySQL. En ese servicio configura `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `APP_ADMIN_USERNAME`, `APP_ADMIN_PASSWORD` y, si corresponde, `PORT` como variables de entorno o secretos.
 
-Cuando exista una demo pública, agrega aquí su URL y capturas de pantalla sin información personal real.
+La página de presentación está en `docs/` y se publica con GitHub Pages desde la rama `main`, carpeta `/docs`. En el repositorio, entra en **Settings → Pages → Build and deployment**, selecciona **Deploy from a branch**, elige `main` y `/docs`, y guarda. GitHub publicará la presentación en [https://iaj23.github.io/EsteticaCanina/](https://iaj23.github.io/EsteticaCanina/). Puede tardar unos minutos en aparecer después de guardar o de cada actualización.
+
+Cuando exista una demo interactiva en Spring Boot, agrega su URL aquí junto a la URL de presentación y capturas de pantalla sin información personal real.
 
 ## Mejoras futuras
 

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ea">
+  <meta name="description" content="EsteticaCanina: aplicación full stack para administrar mascotas, propietarios y citas. Migración de Java Swing a Spring Boot, Thymeleaf y MySQL.">
+  <title>EsteticaCanina | Proyecto full stack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="EsteticaCanina, inicio">
+      <span class="brand-mark">EC</span><span>estetica<span class="brand-light">canina</span></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#proyecto">Proyecto</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#tecnologias">Tecnologías</a>
+    </nav>
+    <a class="nav-cta" href="https://github.com/iAJ23/EsteticaCanina" target="_blank" rel="noreferrer">Ver código <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> PROYECTO FULL STACK · JAVA</p>
+        <h1>Una mejor experiencia<br>para <em>cada patita.</em></h1>
+        <p class="hero-lead">Sistema web para organizar pacientes, propietarios y citas de una estética canina. Nació como una aplicación de escritorio y evolucionó para usarse desde cualquier navegador.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/iAJ23/EsteticaCanina" target="_blank" rel="noreferrer">Explorar repositorio <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="#proyecto">Conocer el proyecto <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-meta"><span>Java 17</span><span>Spring Boot</span><span>MySQL</span></div>
+      </div>
+      <div class="hero-art" aria-label="Pulguita, mascota de la aplicación">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="photo-frame"><img src="assets/pulguita.png" alt="Pulguita, la perrita que inspira la aplicación"></div>
+        <div class="photo-caption"><span class="caption-icon">✳</span><span><strong>Hecho con cariño</strong><small>para quienes cuidan de ellos</small></span></div>
+        <span class="spark spark-one">✳</span><span class="spark spark-two">✦</span>
+      </div>
+      <div class="hero-bottom"><span>01 — GESTIÓN CANINA</span><span>DISEÑADO PARA EL DÍA A DÍA <b>↓</b></span></div>
+    </section>
+
+    <section class="section project-section" id="proyecto">
+      <div class="section-heading">
+        <p class="eyebrow">01 / EL PROYECTO</p>
+        <h2>Del escritorio<br>a la web.</h2>
+      </div>
+      <div class="project-copy">
+        <p class="project-intro">EsteticaCanina digitaliza el flujo de una estética canina: mantiene el registro de cada mascota y su propietario, facilita el seguimiento de citas y organiza el acceso del equipo según sus responsabilidades.</p>
+        <div class="migration-flow">
+          <div><span class="flow-index">ANTES</span><strong>Java Swing</strong><small>Ventanas locales en la computadora</small></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div><span class="flow-index">AHORA</span><strong>Aplicación web</strong><small>Páginas web, API y base de datos</small></div>
+        </div>
+        <p class="project-note">Se conservaron las entidades del dominio que podían reutilizarse. Las ventanas se reemplazaron por páginas web para registrar, consultar y gestionar la información desde el navegador.</p>
+      </div>
+    </section>
+
+    <section class="section features-section" id="funciones">
+      <div class="section-title-row"><div><p class="eyebrow">02 / QUÉ RESUELVE</p><h2>Todo en su lugar.</h2></div><p>Las tareas de cada día, reunidas en una sola herramienta.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card feature-large"><span class="feature-number">01</span><span class="feature-icon">⌂</span><h3>Expedientes de mascotas</h3><p>Datos de la mascota, alergias, atención especial y observaciones. Cada ficha está conectada con los datos de su propietario.</p><div class="feature-underline"></div></article>
+        <article class="feature-card"><span class="feature-number">02</span><span class="feature-icon">◷</span><h3>Agenda de citas</h3><p>Organiza fecha, hora, servicio, estado y notas de cada cita vinculada a una mascota.</p><div class="feature-underline"></div></article>
+        <article class="feature-card"><span class="feature-number">03</span><span class="feature-icon">◎</span><h3>Acceso por roles</h3><p>ADMIN, OPERADOR y CONSULTA cuentan con permisos distintos para cuidar los datos y las acciones disponibles.</p><div class="feature-underline"></div></article>
+        <article class="feature-card feature-wide"><span class="feature-number">04</span><span class="feature-icon">⌘</span><h3>Interfaz web y API REST</h3><p>El personal usa páginas web renderizadas con Thymeleaf y los datos también se exponen mediante endpoints REST para mascotas y citas.</p><div class="feature-underline"></div></article>
+      </div>
+    </section>
+
+    <section class="roles-band">
+      <div><p class="eyebrow">ACCESO CON RESPONSABILIDAD</p><h2>El equipo correcto,<br>con el acceso correcto.</h2></div>
+      <div class="role-list">
+        <article><span class="role-badge admin">A</span><span><strong>ADMIN</strong><small>Control total y gestión de usuarios</small></span></article>
+        <article><span class="role-badge operator">O</span><span><strong>OPERADOR</strong><small>Consulta, registro y edición</small></span></article>
+        <article><span class="role-badge consult">C</span><span><strong>CONSULTA</strong><small>Acceso de solo lectura</small></span></article>
+      </div>
+    </section>
+
+    <section class="section tech-section" id="tecnologias">
+      <div class="section-title-row"><div><p class="eyebrow">03 / TECNOLOGÍAS</p><h2>Construido con Java.<br>Diseñado para crecer.</h2></div><p>Una arquitectura en capas que separa la interfaz, las reglas de negocio y el acceso a datos.</p></div>
+      <div class="tech-list" aria-label="Tecnologías del proyecto">
+        <span>Java 17</span><span>Spring Boot 3</span><span>Spring MVC</span><span>Spring Security</span><span>Thymeleaf</span><span>Spring Data JPA</span><span>Hibernate</span><span>MySQL</span><span>Maven</span><span>HTML · CSS</span>
+      </div>
+      <div class="architecture-note"><span class="architecture-mark">↗</span><p><strong>Arquitectura por capas</strong><br>Controladores web y REST · Servicios de negocio · Repositorios JPA · MySQL</p><a href="https://github.com/iAJ23/EsteticaCanina#arquitectura" target="_blank" rel="noreferrer">Ver estructura <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="closing">
+      <div><p class="eyebrow">¿QUIERES VER CÓMO ESTÁ HECHO?</p><h2>El código está<br>abierto para ti.</h2><p>Explora la implementación, consulta la configuración y conoce los siguientes pasos del proyecto.</p></div>
+      <a class="button button-light" href="https://github.com/iAJ23/EsteticaCanina" target="_blank" rel="noreferrer">Ir al repositorio <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#inicio"><span class="brand-mark">EC</span><span>estetica<span class="brand-light">canina</span></span></a><span>Proyecto de portafolio · Java, Spring Boot y MySQL</span><a href="https://github.com/iAJ23/EsteticaCanina" target="_blank" rel="noreferrer">GitHub ↗</a></footer>
+</body>
+</html>

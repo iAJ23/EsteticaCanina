@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estética Canina | Inicio</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/home.css}">
+    <link rel="stylesheet" th:href="@{/palette.css}">
+    <link rel="stylesheet" th:href="@{/mascot.css}">
+    <link rel="stylesheet" th:href="@{/agenda.css}">
+</head>
+<body>
+<main class="shell home-shell">
+    <header class="topbar">
+        <a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Administración</small></span></a>
+        <div class="account-actions"><span class="topbar-note">Cuidado y bienestar para cada paciente</span><span class="signed-in" sec:authentication="name"></span><form th:action="@{/logout}" method="post"><button class="button button-light" type="submit">Cerrar sesión</button></form></div>
+    </header>
+    <section class="welcome">
+        <div class="welcome-copy">
+            <p class="eyebrow">BIENVENIDO</p>
+            <h1>¿Qué deseas<br>hacer hoy?</h1>
+            <p class="muted welcome-description">Administra los pacientes y mantén a la mano la información importante de cada mascota.</p>
+            <div class="home-stat"><span class="stat-paw">🐾</span><span><strong th:text="${totalMascotas}">0</strong><small>pacientes registrados</small></span></div>
+            <div class="mascot-spotlight"><img th:src="@{/pulguita.png}" alt="Pulguita, la perrita de la estética"><span><strong>Pulguita</strong><small>Nuestra inspiración de cuatro patas</small></span></div>
+        </div>
+        <div class="home-actions">
+            <a class="home-card admin-card" sec:authorize="hasRole('ADMIN')" th:href="@{/usuarios}">
+                <span class="home-card-icon">♙</span>
+                <span class="home-card-text"><strong>Gestionar usuarios</strong><small>Crea cuentas y asigna permisos de acceso.</small></span>
+                <span class="home-card-arrow">→</span>
+            </a>
+            <a class="home-card register-card" th:href="@{/mascotas/nueva}">
+                <span class="home-card-icon">＋</span>
+                <span class="home-card-text"><strong>Registrar mascota</strong><small>Agrega una mascota y los datos de su propietario.</small></span>
+                <span class="home-card-arrow">→</span>
+            </a>
+            <a class="home-card view-card" th:href="@{/mascotas}">
+                <span class="home-card-icon">▤</span>
+                <span class="home-card-text"><strong>Ver datos</strong><small>Consulta, edita o elimina registros existentes.</small></span>
+                <span class="home-card-arrow">→</span>
+            </a>
+            <a class="home-card agenda-card" th:href="@{/agenda}">
+                <span class="home-card-icon">◷</span>
+                <span class="home-card-text"><strong>Agenda de citas</strong><small>Programa y consulta las citas de cada mascota.</small></span>
+                <span class="home-card-arrow">→</span>
+            </a>
+        </div>
+        <div class="welcome-decoration decoration-one"></div><div class="welcome-decoration decoration-two"></div>
+    </section>
+    <footer>Estética Canina <span>·</span> Gestión de pacientes</footer>
+</main>
+</body>
+</html>

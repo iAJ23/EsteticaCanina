@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda | Estética Canina</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"><link rel="stylesheet" th:href="@{/palette.css}"><link rel="stylesheet" th:href="@{/access.css}"><link rel="stylesheet" th:href="@{/agenda.css}">
+</head>
+<body>
+<main class="shell">
+    <header class="topbar"><a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Agenda de citas</small></span></a><div class="account-actions"><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-primary" th:href="@{/agenda/nueva}">＋ Agendar cita</a><a class="button button-light" th:href="@{/}">Inicio</a><form th:action="@{/logout}" method="post"><button class="button button-light" type="submit">Cerrar sesión</button></form></div></header>
+    <section class="hero"><div><p class="eyebrow">ORGANIZACIÓN DIARIA</p><h1>Agenda de citas</h1><p class="muted">Programa los servicios y consulta su estado.</p></div><div class="count"><strong th:text="${#lists.size(citas)}">0</strong><span>citas</span></div></section>
+    <div class="notice" th:if="${mensaje}" th:text="${mensaje}"></div><div class="notice error-notice" th:if="${error}" th:text="${error}"></div>
+    <section class="card table-card">
+        <div class="table-heading"><div><h2>Próximas y anteriores</h2><p class="muted">Ordenadas por fecha y hora</p></div></div>
+        <div class="table-wrap" th:if="${!#lists.isEmpty(citas)}"><table>
+            <thead><tr><th>Fecha y hora</th><th>Mascota</th><th>Propietario</th><th>Servicio</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody><tr th:each="cita : ${citas}">
+                <td><strong th:text="${cita.fecha}">Fecha</strong><small class="cell-sub" th:text="${cita.hora}">Hora</small></td>
+                <td><strong th:text="${cita.mascota.nombre}">Mascota</strong><small class="cell-sub" th:text="${cita.mascota.raza}">Raza</small></td>
+                <td th:text="${cita.mascota.unDueno != null ? cita.mascota.unDueno.nombre : 'Sin propietario'}">Propietario</td>
+                <td><span th:text="${cita.servicio}">Servicio</span><small class="cell-sub" th:if="${cita.notas != null and !cita.notas.isBlank()}" th:text="${cita.notas}">Notas</small></td>
+                <td><span class="status-pill" th:classappend="|status-${#strings.toLowerCase(cita.estado.name())}|" th:text="${cita.estado.etiqueta}">Pendiente</span></td>
+                <td class="actions"><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-light" th:href="@{/agenda/{id}/editar(id=${cita.id})}">Editar</a><form sec:authorize="hasRole('ADMIN')" th:action="@{/agenda/{id}/eliminar(id=${cita.id})}" method="post" onsubmit="return confirm('¿Eliminar esta cita?')"><button class="button button-danger" type="submit">Eliminar</button></form></td>
+            </tr></tbody>
+        </table></div>
+        <div class="empty" th:if="${#lists.isEmpty(citas)}"><div class="empty-icon">◷</div><h3>La agenda está vacía</h3><p class="muted">Agrega la primera cita para organizar los servicios.</p><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-primary" th:href="@{/agenda/nueva}">Agendar cita</a></div>
+    </section>
+    <footer><a class="footer-link" th:href="@{/}">← Volver al inicio</a><br>Estética Canina <span>·</span> Agenda</footer>
+</main>
+</body>
+</html>

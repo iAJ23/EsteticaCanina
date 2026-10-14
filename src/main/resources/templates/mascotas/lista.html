@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estética Canina | Pacientes</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/palette.css}">
+</head>
+<body>
+<main class="shell">
+    <header class="topbar">
+        <a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Gestión de pacientes</small></span></a>
+        <div class="account-actions"><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-primary" th:href="@{/mascotas/nueva}">＋ Registrar mascota</a><a class="button button-light" th:href="@{/}">Inicio</a><a sec:authorize="hasRole('ADMIN')" class="button button-light" th:href="@{/usuarios}">Usuarios</a><form th:action="@{/logout}" method="post"><button class="button button-light" type="submit">Cerrar sesión</button></form></div>
+    </header>
+    <section class="hero">
+        <div><p class="eyebrow">DIRECTORIO</p><h1>Pacientes y propietarios</h1><p class="muted">Consulta y administra los registros de tu estética.</p></div>
+        <div class="count"><strong th:text="${#lists.size(mascotas)}">0</strong><span>mascotas</span></div>
+    </section>
+    <div class="notice" th:if="${mensaje}" th:text="${mensaje}"></div>
+    <section class="card table-card">
+        <div class="table-heading"><div><h2>Directorio</h2><p class="muted">Información de cada mascota y su propietario</p></div></div>
+        <div class="table-wrap" th:if="${!#lists.isEmpty(mascotas)}">
+            <table>
+                <thead><tr><th>Mascota</th><th>Raza y color</th><th>Propietario</th><th>Cuidados</th><th>Acciones</th></tr></thead>
+                <tbody>
+                <tr th:each="mascota : ${mascotas}">
+                    <td><strong th:text="${mascota.nombre}">Nombre</strong><small class="cell-sub" th:text="'Registro #' + ${mascota.num_cliente}">Registro</small></td>
+                    <td><span th:text="${mascota.raza}">Raza</span><small class="cell-sub" th:text="${mascota.color}">Color</small></td>
+                    <td><span th:text="${mascota.unDueno != null ? mascota.unDueno.nombre : 'Sin propietario'}">Propietario</span><small class="cell-sub" th:text="${mascota.unDueno != null ? mascota.unDueno.celDuenio : ''}">Teléfono</small></td>
+                    <td><span th:text="${mascota.alergico == 'Sí' ? 'Alergias' : 'Sin alergias registradas'}">Alergias</span><small class="cell-sub" th:text="${mascota.atencion_especial == 'Sí' ? 'Atención especial' : 'Atención estándar'}">Atención</small></td>
+                    <td class="actions"><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-light" th:href="@{/mascotas/{id}/editar(id=${mascota.num_cliente})}">Editar</a><form sec:authorize="hasRole('ADMIN')" th:action="@{/mascotas/{id}/eliminar(id=${mascota.num_cliente})}" method="post" onsubmit="return confirm('¿Eliminar esta mascota y su registro de propietario?')"><button class="button button-danger" type="submit">Eliminar</button></form></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="empty" th:if="${#lists.isEmpty(mascotas)}"><div class="empty-icon">🐾</div><h3>Aún no hay pacientes</h3><p class="muted">Registra la primera mascota para comenzar.</p><a sec:authorize="hasAnyRole('ADMIN','OPERADOR')" class="button button-primary" th:href="@{/mascotas/nueva}">Registrar mascota</a></div>
+    </section>
+    <footer><a class="footer-link" th:href="@{/}">← Volver al inicio</a><br>Estética Canina <span>·</span> Administración de pacientes</footer>
+</main>
+</body>
+</html>

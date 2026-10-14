@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuarios | Estética Canina</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"><link rel="stylesheet" th:href="@{/palette.css}"><link rel="stylesheet" th:href="@{/access.css}">
+</head>
+<body>
+<main class="shell shell-narrow">
+    <header class="topbar"><a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Administración</small></span></a><form th:action="@{/logout}" method="post"><button class="button button-light" type="submit">Cerrar sesión</button></form></header>
+    <a class="back-link" th:href="@{/}">← Volver al inicio</a>
+    <section class="hero users-hero"><div><p class="eyebrow">CONTROL DE ACCESO</p><h1>Usuarios y roles</h1><p class="muted">Administra quién puede consultar y modificar registros.</p></div><div class="count"><strong th:text="${#lists.size(usuarios)}">0</strong><span>cuentas</span></div></section>
+    <div class="notice" th:if="${mensaje}" th:text="${mensaje}"></div><div class="notice error-notice" th:if="${error}" th:text="${error}"></div>
+    <section class="card user-create-card">
+        <p class="eyebrow">NUEVA CUENTA</p><h2>Agregar usuario</h2>
+        <form th:action="@{/usuarios}" th:object="${form}" method="post" class="form-grid user-create-form">
+            <label>Nombre de usuario<input th:field="*{nombreUsuario}" required minlength="3" maxlength="80" autocomplete="off"></label>
+            <label>Contraseña temporal<input type="password" th:field="*{password}" required minlength="12" autocomplete="new-password"></label>
+            <label>Rol<select th:field="*{rol}"><option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}"></option></select></label>
+            <button class="button button-primary create-user-button" type="submit">Crear cuenta</button>
+        </form>
+    </section>
+    <section class="card user-list-card">
+        <div class="table-heading"><div><h2>Cuentas registradas</h2><p class="muted">Las contraseñas se guardan protegidas y nunca se muestran aquí.</p></div></div>
+        <div class="table-wrap"><table>
+            <thead><tr><th>Usuario</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody><tr th:each="usuario : ${usuarios}">
+                <td><strong th:text="${usuario.nombreUsuario}">Usuario</strong></td>
+                <td><form class="inline-form" th:action="@{/usuarios/{id}/rol(id=${usuario.id})}" method="post"><select name="rol"><option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}" th:selected="${rol == usuario.rol}"></option></select><button class="button button-light" type="submit">Cambiar</button></form></td>
+                <td><span class="role-pill" th:classappend="${usuario.activo} ? ' is-active' : ' is-disabled'" th:text="${usuario.activo} ? 'Activo' : 'Desactivado'">Activo</span></td>
+                <td class="user-actions">
+                    <form th:action="@{/usuarios/{id}/estado(id=${usuario.id})}" method="post"><button class="button" th:classappend="${usuario.activo} ? ' button-danger' : ' button-light'" type="submit" th:text="${usuario.activo} ? 'Desactivar' : 'Activar'"></button></form>
+                    <details class="password-reset"><summary class="button button-light">Cambiar contraseña</summary><form th:action="@{/usuarios/{id}/password(id=${usuario.id})}" method="post"><input type="password" name="password" minlength="12" required placeholder="Mínimo 12 caracteres"><button class="button button-primary" type="submit">Guardar</button></form></details>
+                </td>
+            </tr></tbody>
+        </table></div>
+    </section>
+    <section class="role-help"><h2>Permisos por rol</h2><div class="role-help-grid"><article><strong>ADMIN</strong><p>Acceso total y administración de usuarios.</p></article><article><strong>OPERADOR</strong><p>Consulta, registra y edita mascotas.</p></article><article><strong>CONSULTA</strong><p>Solo consulta mascotas y propietarios.</p></article></div></section>
+    <footer>Solo los administradores pueden gestionar cuentas.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' | Estética Canina'">Mascota | Estética Canina</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/palette.css}">
+</head>
+<body>
+<main class="shell shell-narrow">
+    <header class="topbar"><a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Gestión de pacientes</small></span></a></header>
+    <a class="back-link" th:href="@{/mascotas}">← Volver al directorio</a>
+    <section class="card form-card">
+        <p class="eyebrow">REGISTRO DE PACIENTE</p><h1 th:text="${titulo}">Registrar mascota</h1><p class="muted">Completa los datos de la mascota y de su propietario.</p>
+        <form th:action="${accion}" th:object="${form}" method="post" class="pet-form">
+            <h2>Datos de la mascota</h2>
+            <div class="form-grid">
+                <label>Nombre *<input th:field="*{nombre}" required maxlength="100" placeholder="Ej. Pulguita"></label>
+                <label>Raza *<input th:field="*{raza}" required maxlength="100" placeholder="Ej. Schnauzer"></label>
+                <label>Color *<input th:field="*{color}" required maxlength="60" placeholder="Ej. Sal y pimienta"></label>
+                <label>Alergias<select th:field="*{alergico}"><option value="No">No registradas</option><option value="Sí">Sí</option></select></label>
+                <label>Atención especial<select th:field="*{atencionEspecial}"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+                <label class="full-width">Observaciones<textarea th:field="*{observaciones}" rows="3" maxlength="1000" placeholder="Notas importantes para su cuidado"></textarea></label>
+            </div>
+            <h2 class="section-title">Datos del propietario</h2>
+            <div class="form-grid">
+                <label>Nombre del propietario *<input th:field="*{nombreDueno}" required maxlength="120" placeholder="Nombre completo"></label>
+                <label>Celular *<input th:field="*{celularDueno}" required type="tel" maxlength="30" placeholder="Número de contacto"></label>
+            </div>
+        <div class="form-actions"><a class="button button-light" th:href="@{/mascotas}">Cancelar</a><button class="button button-primary" type="submit">Guardar registro</button></div>
+        </form>
+    </section>
+    <footer>Los campos marcados con * son obligatorios.</footer>
+</main>
+</body>
+</html>

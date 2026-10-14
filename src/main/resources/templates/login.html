@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión | Estética Canina</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"><link rel="stylesheet" th:href="@{/home.css}"><link rel="stylesheet" th:href="@{/palette.css}"><link rel="stylesheet" th:href="@{/access.css}">
+</head>
+<body>
+<main class="login-shell">
+    <a class="brand login-brand" th:href="@{/login}"><span class="brand-mark">EC</span><span>Estética Canina<small>Administración</small></span></a>
+    <section class="card login-card">
+        <div class="login-symbol">EC</div>
+        <p class="eyebrow">ACCESO SEGURO</p><h1>Iniciar sesión</h1><p class="muted">Ingresa tus credenciales para continuar.</p>
+        <div class="notice error-notice" th:if="${param.error}">Usuario o contraseña incorrectos, o cuenta desactivada.</div>
+        <div class="notice" th:if="${param.logout}">Sesión cerrada correctamente.</div>
+        <form th:action="@{/login}" method="post" class="login-form">
+            <label>Usuario<input name="username" autocomplete="username" required autofocus></label>
+            <label>Contraseña<input type="password" name="password" autocomplete="current-password" required></label>
+            <button type="submit" class="button button-primary">Entrar</button>
+        </form>
+    </section>
+    <footer>Acceso exclusivo para personal autorizado.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' | Agenda'">Agendar cita</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"><link rel="stylesheet" th:href="@{/palette.css}"><link rel="stylesheet" th:href="@{/access.css}">
+</head>
+<body>
+<main class="shell shell-narrow">
+    <header class="topbar"><a class="brand" th:href="@{/}"><span class="brand-mark">EC</span><span>Estética Canina<small>Agenda de citas</small></span></a></header>
+    <a class="back-link" th:href="@{/agenda}">← Volver a la agenda</a>
+    <section class="card form-card">
+        <p class="eyebrow">AGENDA</p><h1 th:text="${titulo}">Agendar cita</h1><p class="muted">Asocia el servicio con una mascota registrada.</p>
+        <div class="notice error-notice" th:if="${error}" th:text="${error}"></div>
+        <div class="notice" th:if="${#lists.isEmpty(mascotas)}">Primero registra una mascota para poder agendar una cita. <a th:href="@{/mascotas/nueva}">Registrar mascota</a></div>
+        <form th:action="${accion}" th:object="${form}" method="post" class="pet-form" th:if="${!#lists.isEmpty(mascotas)}">
+            <h2>Datos de la cita</h2>
+            <div class="form-grid">
+                <label>Mascota *<select th:field="*{mascotaId}" required><option value="">Seleccionar mascota</option><option th:each="mascota : ${mascotas}" th:value="${mascota.num_cliente}" th:text="${mascota.nombre + ' · ' + mascota.raza}"></option></select></label>
+                <label>Servicio *<input th:field="*{servicio}" required maxlength="100" placeholder="Baño, corte, limpieza…"></label>
+                <label>Fecha *<input type="date" th:field="*{fecha}" required></label>
+                <label>Hora *<input type="time" th:field="*{hora}" required></label>
+                <label>Estado<select th:field="*{estado}"><option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.etiqueta}"></option></select></label>
+                <label class="full-width">Notas<textarea th:field="*{notas}" rows="3" maxlength="1000" placeholder="Indicaciones para el servicio"></textarea></label>
+            </div>
+            <div class="form-actions"><a class="button button-light" th:href="@{/agenda}">Cancelar</a><button class="button button-primary" type="submit">Guardar cita</button></div>
+        </form>
+    </section>
+    <footer>Los campos marcados con * son obligatorios.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- Configuración de la conexión a la base de datos -->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/estetica_canina</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <!-- Configuración de ejemplo para el cliente Swing heredado. Define las
+         credenciales locales fuera del repositorio antes de usar esa interfaz. -->
+    <property name="hibernate.connection.username">CAMBIAR_USUARIO_LOCAL</property>
+    <property name="hibernate.connection.password">CAMBIAR_CLAVE_LOCAL</property>
+
+    <!-- Dialecto de la base de datos, en este caso MySQL -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Opcional: Mostrar las consultas SQL generadas por Hibernate -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <property name="hibernate.id.new_generator_mappings">true</property>
+    <property name="hibernate.id.optimizer.pooled">1</property>
+
+    <mapping class="com.example.Logic.Dueno"/>
+    <mapping class="com.example.Logic.Mascota"/> <!--Clases de persistencia -->
+
+
+  </session-factory>
+</hibernate-configuration>
